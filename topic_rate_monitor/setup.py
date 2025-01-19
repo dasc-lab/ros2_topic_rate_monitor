@@ -13,10 +13,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer="devansh",
-    maintainer_email="devansh@umich.edu",
-    description="A small utility package to monitor if topics are being published at the right rates",
-    license='Apache-2.0',
+    maintainer='root',
+    maintainer_email='root@todo.todo',
+    description='TODO: Package description',
+    license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
