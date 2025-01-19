@@ -118,6 +118,12 @@ class TopicRateMonitor(Node):
     def get_jitter(self, buffer):
         return np.std(np.array(buffer))
 
+    def make_red(self, msg):
+        return "\x1b[1;31m" + msg + "\x1b[0m"
+
+    def make_green(self, msg):
+        return "\x1b[1;32m" + msg + "\x1b[0m"
+
     def get_status_string(self, expected_rate, observed_rate, tolerance, time_since):
         if np.isnan(expected_rate) or expected_rate <= 0:
             status = "WARNING: no expected rate"
@@ -149,7 +155,7 @@ class TopicRateMonitor(Node):
 
         for topic in self.topics:
             name = topic["name"]
-            expected_rate = topic.get("expected_rate", 0)
+            expected_rate = topic.get("expected_rate", np.nan)
             tolerance = topic.get("tolerance", 0.1)
             observed_rate = self.topic_info[name]["rate"]
             jitter = self.topic_info[name]["jitter"]
@@ -157,6 +163,11 @@ class TopicRateMonitor(Node):
             status = self.get_status_string(
                 expected_rate, observed_rate, tolerance, time_since_last
             )
+
+            if status == "OK":
+                status = self.make_green(status)
+            else:
+                status = self.make_red(status)
 
             table.add_row(
                 [
