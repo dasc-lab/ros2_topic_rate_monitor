@@ -1,14 +1,18 @@
+
+import os
+from time import time
+from collections import deque
+
+import yaml
+import numpy as np
+from prettytable import PrettyTable
+
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
-from time import time
-import yaml
-from prettytable import PrettyTable
-from rosidl_runtime_py.utilities import get_message
 from rclpy.qos import qos_profile_sensor_data
-import os
-from collections import deque
-import numpy as np
+
+from rosidl_runtime_py.utilities import get_message
 
 from topic_rate_monitor_interfaces.msg import TopicRate, TopicRateArray
 

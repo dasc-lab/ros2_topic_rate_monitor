@@ -2,7 +2,10 @@
 
 A small and simple utility to monitor the rate at which specific ros topics are being published. 
 
-After the packages have been built, you can run the node, and specify the `topics` ROS2 parameter to point to the location of the config file. 
+## Installation
+
+Simply clone this repo into your `colcon_ws`, and then build the packages. 
+You will need the following python dependencies: `PyYAML`, `prettytable`, and `numpy`. I used `PyYAML==6.0.2, prettytable==3.12.0, numpy==1.26.4` with `python==3.10.2`.
 
 ## Usage
 
@@ -23,7 +26,7 @@ topics:
 ```
 You can use any message type, as long as you can `ros2 topic echo <topic_name>` for that topic. 
 
-Run the node
+Run the node, and specify the path to the config file as a ros2 parameter.
 ```
 ros2 run topic_rate_monitor topic_rate_monitor --ros-args -p topics:=topics.yaml
 ```
