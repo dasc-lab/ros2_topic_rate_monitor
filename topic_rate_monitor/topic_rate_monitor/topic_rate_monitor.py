@@ -33,6 +33,9 @@ class TopicRateMonitor(Node):
         # Load configuration
         self.topics = self.load_config(config_file)
 
+        # sort the topics 
+        self.topics = sorted(self.topics, key=lambda d: d['name'])
+
         # Variables to track message timestamps
         self.topic_info = {
             topic["name"]: {
@@ -156,6 +159,7 @@ class TopicRateMonitor(Node):
             "Time since last (s)",
             "Status",
         ]
+        table.align["Topic Name"] = "l"
 
         for topic in self.topics:
             name = topic["name"]
@@ -202,7 +206,7 @@ class TopicRateMonitor(Node):
 
         # create the TopicRatesArray message
         array_msg = TopicRateArray()
-        for topic in self.topics:
+        for topic in sorted(self.topics):
 
             name = topic["name"]
             expected_rate = topic.get("expected_rate", 0)
